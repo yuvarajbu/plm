@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+
+<project name="plm" default="all" basedir=".">
+
+	<property environment="env" />
+	<property name="catalina.home" value="${env.CATALINA_HOME}" />
+	<property name="lib.home"      value="${basedir}/lib"/>
+	<target name="all" depends="init,prepare,compile,buildWar" /> 
+	<target name="init">
+		<property name="myName" value="plm" />
+		<property name="build.home" value="${basedir}/build"/>
+		<property name="warFile" value="${myName}.war"/>
+		<property name="src.home"      value="${basedir}/src"/>
+		<property name="web.home"      value="${basedir}/web"/>
+		<property name="web.ui.home"      value="${basedir}/../ui"/>
+		<property name="dist.dir"      value="${basedir}/dist"/>
+	</target>
+
+	<path id="compile.classpath">
+
+		<fileset dir="${lib.home}">
+			<include name="*.jar"/>
+		</fileset>
+
+		<fileset dir="${catalina.home}/bin">
+			<include name="*.jar"/>
+		</fileset>
+		<pathelement location="${catalina.home}/lib"/>
+		<fileset dir="${catalina.home}/lib">
+			<include name="*.jar"/>
+		</fileset>
+
+	</path>
+
+	<property name="compile.debug"       value="true"/>
+	<property name="compile.deprecation" value="false"/>
+	<property name="compile.optimize"    value="true"/>
+
+	<target name="compile" depends="prepare" description="Compile Java sources">
+
+		<!-- Compile Java classes as necessary -->
+		<mkdir dir="${build.home}/WEB-INF/classes"/>
+		<javac srcdir="${src.home}"
+			destdir="${build.home}/WEB-INF/classes"
+			debug="${compile.debug}"
+			deprecation="${compile.deprecation}"
+			optimize="${compile.optimize}">
+				<classpath refid="compile.classpath"/>
+		</javac>
+
+		<!-- Copy application resources -->
+		<copy  todir="${build.home}/WEB-INF/classes">
+			<fileset dir="${src.home}" excludes="**/*.java"/>
+		</copy>
+
+	</target>
+
+	<target name="prepare">
+		<!-- Create build directories as needed -->
+		<mkdir  dir="${build.home}"/>
+		<mkdir  dir="${build.home}/WEB-INF"/>
+		<mkdir  dir="${build.home}/WEB-INF/classes"/>
+
+		<!-- Copy static content of this web application -->
+		<copy todir="${build.home}">
+			<fileset dir="${web.home}"/>
+		</copy>
+		<copy todir="${build.home}">
+			<fileset dir="${web.ui.home}"/>
+		</copy>
+
+		<copy todir="${build.home}/WEB-INF/lib">
+			<fileset dir="${lib.home}"/>
+		</copy>
+	</target>
+
+	<target name="buildWar" depends="compile">
+		<mkdir  dir="${dist.dir}"/>
+		<jar jarfile="${dist.dir}/${warFile}" basedir="${build.home}" />
+	</target>
+
+	<target name="clean" depends="init">
+		<delete dir="${build.home}"/>
+		<delete dir="${dist.dir}"/>
+	</target>
+
+</project>
+
