@@ -166,7 +166,7 @@
 		}
 	\end{itemize}
 
-	Be careful what you add to the repository. In general, binaries and temporary files should not be added. Binary documentation is allowed in the repository but the plain text source documents should accompany them.
+	Only essential files required for QA, deployment, or understanding (documentation) should be added to the repository. In general, binaries and temporary files should not be added. Binary documentation is allowed in the repository but the plain text source documents should accompany them.
 
 	\subsection{Change Management and Branch Management}
 
@@ -178,11 +178,11 @@
 		\item{Approximately every three weeks, the development branch will be merged back to the master branch to prepare for the presentation.}
 	\end{itemize}
 
-	This system should allow us to always have a state available for a demo while continuing to add features in feature branches and fixing bugs in the development branch. To begin, one person should commit the basic layout of the project. From there, each member can begin working on feature branches based on that initial commit. At some point, a feature will be complete and can be merged back to the development branch. We may want to have someone review the code before merging to minimize bugs creeping into the development branch. At the end of a development iteration, the developemnt branch will be merged back to the master branch to prepare for the presentation.
+	This system should allow the team to always have a state available for a demo while continuing to add features in feature branches and fixing bugs in the development branch. To begin, one person should commit the basic layout of the project. From there, each member can begin working on feature branches based on that initial commit. At some point, a feature will be complete and can be merged back to the development branch. QA may want to review the code before merging to minimize bugs creeping into the development branch. At the end of a development iteration, the developemnt branch will be merged back to the master branch to prepare for the presentation.
 
 	\subsection {Code Commit Guidelines}
 
-	Code that produces validation or build errors should not be pushed to github. I don't have a problem with committing code that's broken but it should stay in your local repository until the appropriate fixes are committed as well.
+	Code that produces validation or build errors should not be pushed to GitHub. Broken code may be committed to local repositories but the additional commits required to produce buildable code must also be present in the repository before it is pushed to GitHub.
 
 	\section{Reference}
 
