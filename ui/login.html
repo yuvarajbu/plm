@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>Hello!</title>
+	<meta charset="utf-8">
+	<script src="jquery-1.10.2.min.js"></script>
+	<script>
+		function loginUser(){
+			$.ajax({
+				type: 'POST',
+				url: '/plm/rest/login',
+				contentType: 'application/json; charset=UTF-8',
+				accepts: {
+					text: 'application/json'
+				},
+				dataType: 'json',
+				data: JSON.stringify({
+					name: 'someName',
+					password: 'somePassword'
+				}),
+				success: function(data){
+					// You may also check data.code
+					//// 0 = success, >0 = some error
+					$("h1").html(data.message);
+				},
+				error: function(data){
+					alert("error");
+				}
+			});
+		}
+	</script>
+</head>
+<body onload="loginUser()">
+	Token:
+	<h1></h1>
+</body>
+</html>
