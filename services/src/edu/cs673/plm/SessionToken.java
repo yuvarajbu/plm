@@ -13,6 +13,7 @@ import java.util.Formatter;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.crypto.KeyGenerator;
+import javax.xml.bind.DatatypeConverter;
 
 public class SessionToken {
 	private long uid;
@@ -21,6 +22,16 @@ public class SessionToken {
 	public SessionToken(long uid){
 		this.uid = uid;
 		this.exp = UnixTime.currentTime()+UnixTime.HOUR;
+	}
+
+	/***************************************************************
+	Function name: hexStringToByteArray
+	Author: Christian Heckendorf
+	Created Date: 9/28/13
+	Purpose: Converts a hex string to byte array
+	***************************************************************/
+	public static byte[] hexStringToByteArray(String data){
+		return DatatypeConverter.parseHexBinary(data);
 	}
 
 	/***************************************************************
@@ -81,5 +92,65 @@ public class SessionToken {
 			System.out.println(e.toString());
 			return null;
 		}
+	}
+
+	/***************************************************************
+	Function name: parseToken
+	Author: Christian Heckendorf
+	Created Date: 9/28/13
+	Purpose: Converts a token string back to uid and exp if valid
+	***************************************************************/
+	public void parseToken(String token){
+		String[] separate = token.split(",");
+
+		if(separate.length!=3){
+			uid = 0;
+			return;
+		}
+
+		try{
+			uid = Long.parseLong(separate[0]);
+			exp = Long.parseLong(separate[1]);
+
+			if(token.compareTo(new String(getDataBytes()))!=0){
+				uid = 0;
+			}
+			else if(exp<UnixTime.currentTime()){
+				uid = 0;
+			}
+		} catch(Exception e){
+			System.out.println(e.toString());
+			uid = 0;
+		}
+	}
+
+	/***************************************************************
+	Function name: SessionToken
+	Author: Christian Heckendorf
+	Created Date: 9/28/13
+	Purpose: Constructor to convert string to uid and exp
+	***************************************************************/
+	public SessionToken(String token){
+		try{
+			String tokstr;
+			SecKey sk = new SecKey();
+			Cipher c = Cipher.getInstance("AES");
+			SecretKeySpec k = (SecretKeySpec)sk.getKey();
+			c.init(Cipher.DECRYPT_MODE,k);
+			tokstr = new String(c.doFinal(hexStringToByteArray(token)),"UTF-8");
+
+			parseToken(tokstr);
+		} catch (Exception e){
+			System.out.println(e.toString());
+			uid=0;
+		}
+	}
+
+	public long getUid(){
+		return uid;
+	}
+
+	public long getExp(){
+		return exp;
 	}
 }
