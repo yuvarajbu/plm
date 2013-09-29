@@ -5,19 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.OneToMany;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class User{
+public class Project{
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
 	private Long id;
 	private String name;
-	private String password;
 
 	@OneToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="UserProject")
@@ -37,14 +35,6 @@ public class User{
 
 	public void setName(String name){
 		this.name=name;
-	}
-
-	public String getPassword(){
-		return password;
-	}
-
-	public void setPassword(String password){
-		this.password=password;
 	}
 
 	public List<UserProject> getUserProjects(){
