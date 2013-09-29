@@ -4,6 +4,31 @@
 	<meta charset="utf-8">
 	<script src="jquery-1.10.2.min.js"></script>
 	<script>
+		var tok;
+
+		function renewToken(){
+			$.ajax({
+				type: 'POST',
+				url: '/plm/rest/renewtoken',
+				contentType: 'application/json; charset=UTF-8',
+				accepts: {
+					text: 'application/json'
+				},
+				dataType: 'json',
+				data: JSON.stringify({
+					token: tok
+				}),
+				success: function(data){
+					// You should also check data.code
+					//// 0 = success, >0 = some error
+					$("h1#second").html(data.message);
+				},
+				error: function(data){
+					alert("error");
+				}
+			});
+		}
+
 		function loginUser(){
 			$.ajax({
 				type: 'POST',
@@ -18,9 +43,16 @@
 					password: 'somePassword'
 				}),
 				success: function(data){
-					// You may also check data.code
+					// You should also check data.code
 					//// 0 = success, >0 = some error
-					$("h1").html(data.message);
+					$("h1#first").html(data.message);
+
+					// Note: You might want to encrypt this and store as a cookie
+					tok = data.message;
+
+					// As an example we'll renew the token in 3 seconds
+					//// It currently expires in an hour; maybe refresh in 30 min and on page load?
+					setTimeout(function(){renewToken();},3000);
 				},
 				error: function(data){
 					alert("error");
@@ -31,6 +63,8 @@
 </head>
 <body onload="loginUser()">
 	Token:
-	<h1></h1>
+	<h1 id="first"></h1>
+	Refreshed token:
+	<h1 id="second"></h1>
 </body>
 </html>
