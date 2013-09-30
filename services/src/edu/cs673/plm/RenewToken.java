@@ -1,3 +1,10 @@
+/***************************************************************
+Filename: RenewToken.java
+Author: Christian Heckendorf
+Created Date: 9/29/13
+Purpose: Renews a session token
+Features: None yet
+***************************************************************/
 package edu.cs673.plm;
 
 import javax.ws.rs.GET;
@@ -13,6 +20,12 @@ import edu.cs673.plm.model.TokenMessage;
 
 @Path( "/renewtoken" )
 public class RenewToken {
+	/***************************************************************
+	Function name: getRenewMessage
+	Author: Christian Heckendorf
+	Created Date: 9/29/13
+	Purpose: Returns the new session token
+	***************************************************************/
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

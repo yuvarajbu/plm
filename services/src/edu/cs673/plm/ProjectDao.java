@@ -1,3 +1,10 @@
+/***************************************************************
+Filename: ProjectDao.java
+Author: Christian Heckendorf
+Created Date: 9/29/13
+Purpose: Accesses the Project entity
+Features: None yet
+***************************************************************/
 package edu.cs673.plm;
 
 import javax.persistence.EntityManager;
@@ -6,6 +13,12 @@ import javax.persistence.Query;
 import edu.cs673.plm.model.Project;
 
 public class ProjectDao {
+	/***************************************************************
+	Function name: getMemberCount
+	Author: Christian Heckendorf
+	Created Date: 9/29/13
+	Purpose: Returns the number of users in a project
+	***************************************************************/
 	public static long getMemberCount(Dba dba, Project project){
 		EntityManager em = dba.getActiveEm();
 		Query q = em.createQuery("select project from Project project where project.id = :id")

@@ -1,3 +1,10 @@
+/***************************************************************
+Filename: RoleDao.java
+Author: Christian Heckendorf
+Created Date: 9/29/13
+Purpose: Accesses the Role entity
+Features: None yet
+***************************************************************/
 package edu.cs673.plm;
 
 import javax.persistence.EntityManager;

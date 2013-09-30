@@ -19,6 +19,12 @@ public class SessionToken {
 	private long uid;
 	private long exp;
 
+	/***************************************************************
+	Function name: SessionToken
+	Author: Christian Heckendorf
+	Created Date: 9/28/13
+	Purpose: Initializes an object
+	***************************************************************/
 	public SessionToken(long uid){
 		this.uid = uid;
 		this.exp = UnixTime.currentTime()+UnixTime.HOUR;

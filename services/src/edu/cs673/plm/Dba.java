@@ -1,3 +1,10 @@
+/***************************************************************
+Filename: Dba.java
+Author: Christian Heckendorf
+Created Date: 9/21/13
+Purpose: Helper class to get an EntityManager object
+Features: Probably all features
+***************************************************************/
 package edu.cs673.plm;
 
 import javax.persistence.EntityManager;
@@ -12,21 +19,33 @@ public class Dba {
 
 	private EntityManager outer;
 
-	/**
-	 * open Dba and also start a transaction
-	 */
+	/***************************************************************
+	Function name: Dba
+	Author: Christian Heckendorf
+	Created Date: 9/21/13
+	Purpose: Prepares the class
+	***************************************************************/
 	public Dba() {
 		this(false);
 	}
 
-	/**
-	 * open Dba; if readonly no JPA transaction is actually started, meaning you will have no persistence store. You can still persist stuff, but the entities won't become managed.
-	 */
+	/***************************************************************
+	Function name: Dba
+	Author: Christian Heckendorf
+	Created Date: 9/21/13
+	Purpose: Prepares the class
+	***************************************************************/
 	public Dba(boolean readOnly) {
 		initialize();
 		openEm(readOnly);
 	}
 
+	/***************************************************************
+	Function name: openEm
+	Author: Christian Heckendorf
+	Created Date: 9/21/13
+	Purpose: Opens an EntityManager
+	***************************************************************/
 	public void openEm(boolean readOnly) {
 		if (outer != null) {
 			return;
@@ -39,9 +58,12 @@ public class Dba {
 		}
 	}
 
-	/** Get the outer transaction; an active transaction must already exist
-	  for this to succeed.
-	 */
+	/***************************************************************
+	Function name: getActiveEm
+	Author: Christian Heckendorf
+	Created Date: 9/21/13
+	Purpose: Returns the active EntityManager
+	***************************************************************/
 	public EntityManager getActiveEm(){
 		if(outer == null){
 			throw new IllegalStateException("No transaction was active!");
@@ -51,8 +73,12 @@ public class Dba {
 	}
 
 
-	/** Close the entity manager, properly committing or rolling back a transaction if one is still active.
-	 */
+	/***************************************************************
+	Function name: closeEm
+	Author: Christian Heckendorf
+	Created Date: 9/21/13
+	Purpose: Closes the EntityManager
+	***************************************************************/
 	public void closeEm(){
 		if(outer == null){
 			return;
@@ -75,20 +101,35 @@ public class Dba {
 	}
 
 
-	/** Mark the transaction as rollback only, if there is an active transaction to begin with. 
-	 */
+	/***************************************************************
+	Function name: markRollback
+	Author: Christian Heckendorf
+	Created Date: 9/21/13
+	Purpose: Marks the transaction as a rollback
+	***************************************************************/
 	public void markRollback(){
 		if(outer != null){
 			outer.getTransaction().setRollbackOnly();
 		}
 	}
 
+	/***************************************************************
+	Function name: isRollbackOnly
+	Author: Christian Heckendorf
+	Created Date: 9/21/13
+	Purpose: Determines whether the transaction is a rollback
+	***************************************************************/
 	public boolean isRollbackOnly(){
 		return outer != null && outer.getTransaction().getRollbackOnly();
 	}
 
 
-	// thread safe way to initialize the entity manager factory.
+	/***************************************************************
+	Function name: initialize
+	Author: Christian Heckendorf
+	Created Date: 9/21/13
+	Purpose: Initializes the EntityManagerFactory
+	***************************************************************/
 	private void initialize(){
 		if(initialized){
 			return;
