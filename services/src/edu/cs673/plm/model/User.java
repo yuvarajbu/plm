@@ -20,7 +20,7 @@ public class User{
 	private String password;
 
 	@OneToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="UserProject")
+	@JoinTable(name="UserProject",joinColumns=@JoinColumn(name="userId"),inverseJoinColumns=@JoinColumn(name="id"))
 	private List<UserProject> userProjects;
 
 	public Long getId(){

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -14,18 +15,18 @@ public class Project{
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
-	private Long id;
+	private long id;
 	private String name;
 
 	@OneToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="UserProject")
+	@JoinTable(name="UserProject",joinColumns=@JoinColumn(name="projectId"),inverseJoinColumns=@JoinColumn(name="id"))
 	private List<UserProject> userProjects;
 
-	public Long getId(){
+	public long getId(){
 		return id;
 	}
 
-	public void setId(Long id){
+	public void setId(long id){
 		this.id=id;
 	}
 

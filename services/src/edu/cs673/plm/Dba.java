@@ -105,6 +105,7 @@ public class Dba {
 				emf = Persistence.createEntityManagerFactory("PLMPU");
 
 			} catch(Throwable t){
+				t.printStackTrace();
 				return;
 			}
 		}

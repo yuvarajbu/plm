@@ -13,7 +13,7 @@ public class UserProject{
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
-	private Long id;
+	private long id;
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="userId")
@@ -27,11 +27,11 @@ public class UserProject{
 	@JoinColumn(name="projectId")
 	private Project project;
 
-	public Long getId(){
+	public long getId(){
 		return id;
 	}
 
-	public void setId(Long id){
+	public void setId(long id){
 		this.id=id;
 	}
 

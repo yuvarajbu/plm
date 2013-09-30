@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -18,7 +19,7 @@ public class Role{
 	private String name;
 
 	@OneToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="UserProject")
+	@JoinTable(name="UserProject",joinColumns=@JoinColumn(name="roleId"),inverseJoinColumns=@JoinColumn(name="id"))
 	private List<UserProject> userProjects;
 
 	public Long getId(){
