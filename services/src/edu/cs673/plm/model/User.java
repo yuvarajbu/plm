@@ -22,7 +22,7 @@ public class User{
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
-	private Long id;
+	private long id;
 	private String name;
 	private String password;
 
@@ -36,7 +36,7 @@ public class User{
 	Created Date: 9/21/13
 	Purpose: Gets an id
 	***************************************************************/
-	public Long getId(){
+	public long getId(){
 		return id;
 	}
 
@@ -46,7 +46,7 @@ public class User{
 	Created Date: 9/21/13
 	Purpose: Sets an id
 	***************************************************************/
-	public void setId(Long id){
+	public void setId(long id){
 		this.id=id;
 	}
 

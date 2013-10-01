@@ -22,7 +22,7 @@ public class Role{
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
-	private Long id;
+	private long id;
 	private String name;
 
 	@OneToMany(fetch=FetchType.LAZY)
@@ -35,7 +35,7 @@ public class Role{
 	Created Date: 9/29/13
 	Purpose: Gets an id
 	***************************************************************/
-	public Long getId(){
+	public long getId(){
 		return id;
 	}
 
@@ -45,7 +45,7 @@ public class Role{
 	Created Date: 9/29/13
 	Purpose: Sets an id
 	***************************************************************/
-	public void setId(Long id){
+	public void setId(long id){
 		this.id=id;
 	}
 
