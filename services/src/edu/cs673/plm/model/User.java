@@ -30,6 +30,15 @@ public class User{
 	@JoinTable(name="UserProject",joinColumns=@JoinColumn(name="userId"),inverseJoinColumns=@JoinColumn(name="id"))
 	private List<UserProject> userProjects;
 
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="userAssigned")
+	private List<Task> tasksAssigned;
+
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="userCreated")
+	private List<Bug> bugsCreated;
+
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="userAssigned")
+	private List<Bug> bugsAssigned;
+
 	/***************************************************************
 	Function name: getId
 	Author: Christian Heckendorf
@@ -109,4 +118,65 @@ public class User{
 	public void setUserProjects(List<UserProject> userProjects){
 		this.userProjects=userProjects;
 	}
+
+	/************************************************************
+	Function name: getTasksAssigned()
+	Author: Christian Heckendorf
+	Created date: 10/01/2013
+	Purpose: Returns the tasks assigned
+	************************************************************/
+	public List<Task> getTasksAssigned(){
+		return tasksAssigned;
+	}
+
+	/************************************************************
+	Function name: setTasksAssigned()
+	Author: Christian Heckendorf
+	Created date: 10/01/2013
+	Purpose: Sets the tasks assigned
+	************************************************************/
+	public void setTasksAssigned(List<Task> tasksAssigned){
+		this.tasksAssigned=tasksAssigned;
+	}
+
+	/************************************************************
+	Function name: getBugsCreated()
+	Author: Christian Heckendorf
+	Created date: 10/01/2013
+	Purpose: Returns the bugs created
+	************************************************************/
+	public List<Bug> getBugsCreated(){
+		return bugsCreated;
+	}
+
+	/************************************************************
+	Function name: setBugsCreated()
+	Author: Christian Heckendorf
+	Created date: 10/01/2013
+	Purpose: Sets the bugs created
+	************************************************************/
+	public void setBugsCreated(List<Bug> bugsCreated){
+		this.bugsCreated=bugsCreated;
+	}
+
+	/************************************************************
+	Function name: getBugsAssigned()
+	Author: Christian Heckendorf
+	Created date: 10/01/2013
+	Purpose: Returns the assigned bugs
+	************************************************************/
+	public List<Bug> getBugsAssigned(){
+		return bugsAssigned;
+	}
+
+	/************************************************************
+	Function name: setBugsAssigned()
+	Author: Christian Heckendorf
+	Created date: 10/01/2013
+	Purpose: Sets the assigned bugs
+	************************************************************/
+	public void setBugsAssigned(List<Bug> bugsAssigned){
+		this.bugsAssigned=bugsAssigned;
+	}
+
 }

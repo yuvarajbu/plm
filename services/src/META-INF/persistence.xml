@@ -7,6 +7,10 @@
 		<class>edu.cs673.plm.model.Role</class>
 		<class>edu.cs673.plm.model.Project</class>
 		<class>edu.cs673.plm.model.UserProject</class>
+		<class>edu.cs673.plm.model.Release</class>
+		<class>edu.cs673.plm.model.UserStory</class>
+		<class>edu.cs673.plm.model.Task</class>
+		<class>edu.cs673.plm.model.Bug</class>
 		<properties>
 			<!-- <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/> -->
 			<!-- <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/plm"/> -->

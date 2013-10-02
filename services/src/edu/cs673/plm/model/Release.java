@@ -1,10 +1,10 @@
-/***************************************************************
-Filename: Project.java
+/************************************************************
+Filename: Release.java
 Author: Christian Heckendorf
-Created Date: 9/29/13
-Purpose: Holds a project
-Features: None
-***************************************************************/
+Created date: 10/01/2013
+Purpose: Holds a release
+Feature: None
+************************************************************/
 package edu.cs673.plm.model;
 
 import java.util.List;
@@ -12,30 +12,31 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class Project{
+public class Release{
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
 	private long id;
-	private String name;
+	private String version;
 
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="UserProject",joinColumns=@JoinColumn(name="projectId"),inverseJoinColumns=@JoinColumn(name="id"))
-	private List<UserProject> userProjects;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="releaseId")
+	private Project project;
 
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="project")
-	private List<Release> releases;
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="release")
+	private List<UserStory> userStories;
 
 	/***************************************************************
 	Function name: getId
 	Author: Christian Heckendorf
-	Created Date: 9/29/13
+	Created Date: 10/01/13
 	Purpose: Gets an id
 	***************************************************************/
 	public long getId(){
@@ -45,7 +46,7 @@ public class Project{
 	/***************************************************************
 	Function name: setId
 	Author: Christian Heckendorf
-	Created Date: 9/29/13
+	Created Date: 10/01/13
 	Purpose: Sets an id
 	***************************************************************/
 	public void setId(long id){
@@ -53,62 +54,63 @@ public class Project{
 	}
 
 	/***************************************************************
-	Function name: getName
+	Function name: getVersion
 	Author: Christian Heckendorf
-	Created Date: 9/29/13
-	Purpose: Gets a name
+	Created Date: 10/01/13
+	Purpose: Gets a version
 	***************************************************************/
-	public String getName(){
-		return name;
+	public String getVersion(){
+		return version;
 	}
 
 	/***************************************************************
-	Function name: setName
+	Function name: setVersion
 	Author: Christian Heckendorf
-	Created Date: 9/29/13
-	Purpose: Sets a name
+	Created Date: 10/01/13
+	Purpose: Sets a version
 	***************************************************************/
-	public void setName(String name){
-		this.name=name;
-	}
-
-	/***************************************************************
-	Function name: getUserProjects
-	Author: Christian Heckendorf
-	Created Date: 9/29/13
-	Purpose: Gets a list of UserProjects
-	***************************************************************/
-	public List<UserProject> getUserProjects(){
-		return userProjects;
-	}
-
-	/***************************************************************
-	Function name: setUserProjects
-	Author: Christian Heckendorf
-	Created Date: 9/29/13
-	Purpose: Sets a list of UserProjects
-	***************************************************************/
-	public void setUserProjects(List<UserProject> userProjects){
-		this.userProjects=userProjects;
+	public void setVersion(String version){
+		this.version=version;
 	}
 
 	/************************************************************
-	Function name: getReleases()
+	Function name: getProject()
 	Author: Christian Heckendorf
 	Created date: 10/01/2013
-	Purpose: Returns releases
+	Purpose: Returns the project
 	************************************************************/
-	public List<Release> getReleases(){
-		return releases;
+	public Project getProject(){
+		return project;
 	}
 
 	/************************************************************
-	Function name: setReleases()
+	Function name: setProject()
 	Author: Christian Heckendorf
 	Created date: 10/01/2013
-	Purpose: Sets releases
+	Purpose: Sets a project
 	************************************************************/
-	public void setReleases(List<Release> releases){
-		this.releases=releases;
+	public void setProject(Project project){
+		this.project=project;
 	}
+
+	/************************************************************
+	Function name: getUserStories()
+	Author: Christian Heckendorf
+	Created date: 10/01/2013
+	Purpose: Returns the user stories
+	************************************************************/
+	public List<UserStory> getUserStories(){
+		return userStories;
+	}
+
+	/************************************************************
+	Function name: setUserStories()
+	Author: Christian Heckendorf
+	Created date: 10/01/2013
+	Purpose: Sets the user stories
+	************************************************************/
+	public void setUserStories(List<UserStory> userStories){
+		this.userStories=userStories;
+	}
+
 }

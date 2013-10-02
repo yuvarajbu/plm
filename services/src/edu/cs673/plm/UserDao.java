@@ -14,6 +14,24 @@ import edu.cs673.plm.model.User;
 import edu.cs673.plm.model.StatusMessage;
 
 public class UserDao {
+	/************************************************************
+	Function name: getUserById()
+	Author: Christian Heckendorf
+	Created date: 10/01/2013
+	Purpose: Fills in a user object by ID
+	************************************************************/
+	public static User getUserById(Dba dba, long uid){
+		EntityManager em = dba.getActiveEm();
+		Query q = em.createQuery("select user from User user where user.id = :id")
+			.setParameter("id",uid);
+		try{
+			User user = (User)q.getSingleResult();
+			return user;
+		} catch (Exception e){
+		}
+		return null;
+	}
+
 	/***************************************************************
 	Function name: nameValid
 	Author: Christian Heckendorf
@@ -21,7 +39,8 @@ public class UserDao {
 	Purpose: Checks if the name has been used or not
 	***************************************************************/
 	private static boolean nameValid(EntityManager em, User user){
-		if(((Long) em.createQuery("select count(*) from User user").getSingleResult()).intValue()>0)
+		if(((Long) em.createQuery("select count(*) from User user where user.name = :name")
+					.setParameter("name",user.getName()).getSingleResult()).intValue()>0)
 			return false;
 		return true;
 	}
