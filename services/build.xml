@@ -93,6 +93,10 @@
 		<mkdir  dir="${reports.tests}"/>
 		<mkdir  dir="${build.tests}"/>
 
+		<copy todir="${build.tests}/META-INF">
+			<fileset dir="${src.tests}/META-INF"/>
+		</copy>
+
 		<path id="classpath.test">
 			<pathelement location="${build.tests}"/>
 			<pathelement path="${java.class.path}"/>

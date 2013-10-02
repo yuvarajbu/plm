@@ -1,8 +1,8 @@
 /************************************************************
-Filename: SessionTokenTest.java
+Filename: ProjectDaoTest.java
 Author: Christian Heckendorf
-Created date: 09/28/2013
-Purpose: Tests the SessionToken class
+Created date: 09/29/2013
+Purpose: Tests the ProjectDao class
 Feature: None
 ************************************************************/
 package edu.cs673.plm;
@@ -13,23 +13,23 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import edu.cs673.plm.model.Project;
+
 @RunWith(JUnit4.class)
-public class SessionTokenTest {
+public class ProjectDaoTest {
 
 	/************************************************************
-	Function name: decodeToken
+	Function name: getMemberCount
 	Author: Christian Heckendorf
-	Created date: 09/28/2013
-	Purpose: Tests if the class can decode a token properly
+	Created date: 09/29/2013
+	Purpose: Tests the getMemberCount function
 	************************************************************/
 	@Test
-	public void decodeToken() {
-		SessionToken decst;
-		SessionToken st = new SessionToken(1);
-		String tok = st.generateToken();
+	public void getMemberCount() {
+		Dba dba = new Dba(false);
+		Project project = new Project();
+		project.setId(1);
 
-		decst = new SessionToken(tok);
-
-		assertEquals(1,decst.getUid());
+		assertEquals(2,ProjectDao.getMemberCount(dba,project));
 	}
 }

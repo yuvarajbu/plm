@@ -1,3 +1,10 @@
+<!--
+Filename: login.html
+Author: Christian Heckendorf
+Created date: 09/30/2013
+Purpose: Example login and token renewal interface
+Feature: None
+-->
 <html>
 <head>
 	<title>Hello!</title>
@@ -6,6 +13,12 @@
 	<script>
 		var tok;
 
+		/************************************************************
+		Function name: renewToken
+		Author: Christian Heckendorf
+		Created date: 09/30/2013
+		Purpose: Renews a token
+		************************************************************/
 		function renewToken(){
 			$.ajax({
 				type: 'POST',
@@ -29,6 +42,12 @@
 			});
 		}
 
+		/************************************************************
+		Function name: loginUser
+		Author: Christian Heckendorf
+		Created date: 09/30/2013
+		Purpose: Logs in a user
+		************************************************************/
 		function loginUser(){
 			$.ajax({
 				type: 'POST',

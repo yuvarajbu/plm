@@ -1,3 +1,10 @@
+/***************************************************************
+Filename: Register.java
+Author: Christian Heckendorf
+Created Date: 9/21/13
+Purpose: Registers a new user
+Features: Register
+***************************************************************/
 package edu.cs673.plm;
 
 import javax.ws.rs.GET;
@@ -12,6 +19,12 @@ import edu.cs673.plm.model.User;
 
 @Path( "/register" )
 public class Register {
+	/***************************************************************
+	Function name: getRegisterMessage
+	Author: Christian Heckendorf
+	Created Date: 9/21/13
+	Purpose: Creates a user
+	***************************************************************/
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

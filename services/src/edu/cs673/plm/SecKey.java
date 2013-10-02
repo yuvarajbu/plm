@@ -16,6 +16,12 @@ public class SecKey {
 	private static KeyGenerator kg = null;
 	private static SecretKey outer = null;
 
+	/***************************************************************
+	Function name: SecKey
+	Author: Christian Heckendorf
+	Created Date: 9/28/13
+	Purpose: Initializes the object
+	***************************************************************/
 	public SecKey() {
 		initialize();
 	}

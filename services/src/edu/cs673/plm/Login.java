@@ -19,6 +19,12 @@ import edu.cs673.plm.model.User;
 
 @Path( "/login" )
 public class Login {
+	/***************************************************************
+	Function name: getLoginMessage
+	Author: Christian Heckendorf
+	Created Date: 9/21/13
+	Purpose: Returns a session token or error
+	***************************************************************/
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
